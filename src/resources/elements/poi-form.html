@@ -1,10 +1,8 @@
 <template>
   <form submit.trigger="addPoi()" class="ui form stacked segment">
     <h3 class="ui dividing header">Add a POI</h3>
-    <div class="grouped inline fields">
     <div class="field"><label>Name </label> <input value.bind="name" /></div>
     <div class="field"><label>Description </label> <input value.bind="description" /></div>
-    </div>
     <div class="grouped inline fields">
       <div class="field" repeat.for="method of category">
     <div class="ui radio checkbox">
