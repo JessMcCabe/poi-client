@@ -4,16 +4,19 @@ import { Poi } from '../../services/poi-types';
 export class PoiForm {
   name: string;
   description: string;
-  category: string;
   image: string;
   @bindable
   pois: Poi[];
+  @bindable
+  category: string[];
+
+  selectedCategory = '';
 
   addPoi() {
     const poi = {
       name: this.name,
       description: this.description,
-      category: this.category,
+      category: this.selectedCategory,
       image: this.image
     };
     this.pois.push(poi);
