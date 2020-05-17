@@ -33,14 +33,21 @@ export class PoiService {
     users.forEach(user => {
       this.users.set(user.email, user);
     });
+  }
 
-    signup(firstName: string, lastName: string, email: string, password: string) {
-      this.changeRouter(PLATFORM.moduleName('app'))
-    }
+  signup(firstName: string, lastName: string, email: string, password: string) {
+    this.changeRouter(PLATFORM.moduleName('app'))
+  }
 
-    async login(email: string, password: string) {
+  async login(email: string, password: string) {
+    const user = this.users.get(email);
+    if (user && (user.password === password)) {
       this.changeRouter(PLATFORM.moduleName('app'))
+      return true;
+    } else {
+      return false;
     }
+  }
 
     logout() {
       this.changeRouter(PLATFORM.moduleName('start'))
