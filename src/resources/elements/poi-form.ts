@@ -3,6 +3,7 @@ import { bindable } from 'aurelia-framework';
 import { Poi } from '../../services/poi-types';
 import { PoiService } from '../../services/poi-service';
 
+
 @inject(PoiService)
 export class PoiForm {
   name: string;
@@ -19,6 +20,9 @@ export class PoiForm {
 
   addPoi() {
     this.ds.createPoi(this.name, this.description, this.selectedCategory, this.link, this.author)
+    
     }
+
+
   }
 
