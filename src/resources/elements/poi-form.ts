@@ -1,25 +1,24 @@
+import { inject } from 'aurelia-framework';
 import { bindable } from 'aurelia-framework';
 import { Poi } from '../../services/poi-types';
+import { PoiService } from '../../services/poi-service';
 
+@inject(PoiService)
 export class PoiForm {
   name: string;
   description: string;
-  image: string;
-  @bindable
-  pois: Poi[];
-  @bindable
-  category: string[];
+  link: string;
+  @bindable pois: Poi[];
+  @bindable category: string[];
+  author: string;
+
 
   selectedCategory = '';
 
+  constructor(private ds: PoiService) {}
+
   addPoi() {
-    const poi = {
-      name: this.name,
-      description: this.description,
-      category: this.selectedCategory,
-      image: this.image
-    };
-    this.pois.push(poi);
-    console.log(poi);
+    this.ds.createPoi(this.name, this.description, this.selectedCategory, this.link, this.author)
+    }
   }
-}
+
