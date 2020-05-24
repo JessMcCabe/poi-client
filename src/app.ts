@@ -15,11 +15,11 @@ export class App {
         title: 'POI'
       },
       {
-        route: 'page2',
-        name: 'page2',
-        moduleId: PLATFORM.moduleName('views/pois'),
+        route: 'list',
+        name: 'List',
+        moduleId: PLATFORM.moduleName('views/list'),
         nav: true,
-        title: 'Page2'
+        title: 'List'
       },
       {
         route: 'logout',
