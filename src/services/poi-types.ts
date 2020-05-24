@@ -1,8 +1,10 @@
 export interface Poi {
+  id: string;
   name: string;
   description: string;
   category: string;
-  image: string;
+  link: string;
+  author: string
 }
 export interface User {
   firstName: string;

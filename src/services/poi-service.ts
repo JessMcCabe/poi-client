@@ -16,19 +16,19 @@ export class PoiService {
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure(http => {
-      http.withBaseUrl('http://localhost:8080');
+      http.withBaseUrl('http://localhost:3000');
     });
     this.getPois();
     this.getUsers();
   }
   async getPois() {
-    const response = await this.httpClient.get('/api/pois.json');
+    const response = await this.httpClient.get('/api/poi');
     this.pois = await response.content;
     console.log (this.pois);
   }
 
   async getUsers() {
-    const response = await this.httpClient.get('/api/users.json');
+    const response = await this.httpClient.get('/api/users');
     const users = await response.content;
     users.forEach(user => {
       this.users.set(user.email, user);
@@ -36,7 +36,8 @@ export class PoiService {
   }
 
   signup(firstName: string, lastName: string, email: string, password: string) {
-    this.changeRouter(PLATFORM.moduleName('app'))
+    //this.changeRouter(PLATFORM.moduleName('app'))
+    return false;
   }
 
   async login(email: string, password: string) {
