@@ -16,11 +16,9 @@ export class PoiService {
 
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
-    httpClient.configure(http => {
+    httpClient.configure((http) => {
       http.withBaseUrl('http://localhost:3000');
     });
-    this.getPois();
-    this.getUsers();
   }
   async getPois() {
     const response = await this.httpClient.get('/api/poi');
@@ -67,22 +65,55 @@ export class PoiService {
   }
 
   async login(email: string, password: string) {
-    const user = this.users.get(email);
-    if (user && (user.password === password)) {
-      this.changeRouter(PLATFORM.moduleName('app'))
-      return true;
-    } else {
-      return false;
+    let success = false;
+    try {
+      const response = await this.httpClient.post('/api/users/authenticate', { email: email, password: password });
+      const status = await response.content;
+      if (status.success) {
+        this.httpClient.configure((configuration) => {
+          configuration.withHeader('Authorization', 'bearer ' + status.token);
+        });
+        localStorage.pois = JSON.stringify(response.content)
+        localStorage.list = JSON.stringify(response.content)
+        await this.getUsers();
+        await this.getPois();
+        this.changeRouter(PLATFORM.moduleName('app'));
+        success = status.success;
+      }
+    } catch (e) {
+      success = false;
     }
+    return success;
   }
 
-    logout() {
-      this.changeRouter(PLATFORM.moduleName('start'))
-    }
+  logout() {
+    localStorage.pois = null;
+    this.httpClient.configure(configuration => {
+      configuration.withHeader('Authorization', '');
+    });
+    this.changeRouter(PLATFORM.moduleName('start'));
+  }
 
-    changeRouter(module:string) {
-      this.router.navigate('/', { replace: true, trigger: false });
-      this.router.reset();
-      this.au.setRoot(PLATFORM.moduleName(module));
+
+  checkIsAuthenticated() {
+    let authenticated = false;
+    if (localStorage.pois !== 'null') {
+      authenticated = true;
+      this.httpClient.configure(http => {
+        const auth = JSON.parse(localStorage.pois);
+        http.withHeader('Authorization', 'bearer ' + auth.token);
+      });
+      this.changeRouter(PLATFORM.moduleName('app'));
     }
   }
+  changeRouter(module:string) {
+    this.router.navigate('/', { replace: true, trigger: false });
+    this.router.reset();
+    this.au.setRoot(PLATFORM.moduleName(module));
+
+  }
+
+
+}
+
+
