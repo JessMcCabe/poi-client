@@ -1,6 +1,6 @@
 import { inject } from 'aurelia-framework';
 import { bindable } from 'aurelia-framework';
-import { Poi } from '../../services/poi-types';
+import { Poi, Location } from '../../services/poi-types';
 import { PoiService } from '../../services/poi-service';
 
 
@@ -15,11 +15,12 @@ export class PoiForm {
 
 
   selectedCategory = '';
+  location: Location = { lat: 53.2734, lng: -7.7783203 };
 
   constructor(private ds: PoiService) {}
 
   addPoi() {
-    this.ds.createPoi(this.name, this.description, this.selectedCategory, this.link, this.author)
+    this.ds.createPoi(this.name, this.description, this.selectedCategory, this.link, this.author,  this.location)
     
     }
 

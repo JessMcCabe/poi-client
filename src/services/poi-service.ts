@@ -1,7 +1,7 @@
 import { inject ,Aurelia } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
-import { Poi, User  } from './poi-types';
+import { Poi, User , Location } from './poi-types';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { TotalUpdate } from './messages';
@@ -35,14 +35,15 @@ export class PoiService {
     });
   }
 
-  async createPoi(name: string, description: string, category: string, link: string, author:string) {
+  async createPoi(name: string, description: string, category: string, link: string, author:string, location : Location) {
   const user = this.usersById.values().next()
     const poi = {
       name: name,
       description: description,
       category: category,
       link:link,
-      author: author
+      author: author,
+      location : location
     };
     const response = await this.httpClient.post('/api/user/'+ user.value._id +'/poi', poi);
     const newPoi = await response.content;

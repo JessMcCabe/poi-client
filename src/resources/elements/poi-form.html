@@ -1,4 +1,6 @@
 <template>
+  <require from="./coordinates"></require>
+
   <form submit.trigger="addPoi()" class="ui form stacked segment">
     <h3 class="ui dividing header">Add a POI</h3>
     <div class="field"><label>Name </label> <input value.bind="name" /></div>
@@ -11,6 +13,7 @@
     </div>
       </div>
     </div>
+      <coordinates location.two-way="location"></coordinates>
     <div class="field"><label>Image </label> <input value.bind="image" /></div>
     <input type="hidden" name="author" value={{currentUser}}>
     <button class="ui blue submit button">Add</button>

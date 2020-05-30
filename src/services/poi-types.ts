@@ -1,3 +1,8 @@
+export interface Location {
+  lat: number;
+  lng: number;
+}
+
 export interface Poi {
   name: string;
   description: string;
@@ -5,6 +10,7 @@ export interface Poi {
   link: string;
   author: string
   _id: string
+  location: Location
 }
 export interface User {
   _id: string;
