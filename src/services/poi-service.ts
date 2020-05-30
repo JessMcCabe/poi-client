@@ -77,7 +77,7 @@ export class PoiService {
         localStorage.list = JSON.stringify(response.content)
         await this.getUsers();
         await this.getPois();
-        this.changeRouter(PLATFORM.moduleName('app'));
+        this.changeRouter(PLATFORM.moduleName('start'))
         success = status.success;
       }
     } catch (e) {
