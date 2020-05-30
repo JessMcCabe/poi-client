@@ -5,6 +5,8 @@ import { Poi, User  } from './poi-types';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { TotalUpdate } from './messages';
+const bcrypt = require('bcryptjs');          // ADDED
+const saltRounds = 10;                     // ADDED
 
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
@@ -52,6 +54,7 @@ export class PoiService {
   }
 
   async signup(firstName: string, lastName: string, email: string, password: string) {
+
     const user = {
       firstName: firstName,
       lastName: lastName,
@@ -67,8 +70,8 @@ export class PoiService {
   }
 
   async login(email: string, password: string) {
-    const user = this.users.get(email);
-    if (user && (user.password === password)) {
+    const response = await this.httpClient.post('/api/users/auth', {email, password});
+    if (response.isSuccess) {
       this.changeRouter(PLATFORM.moduleName('app'))
       return true;
     } else {
