@@ -67,7 +67,7 @@ export class PoiService {
   async login(email: string, password: string) {
     let success = false;
     try {
-      const response = await this.httpClient.post('/api/users/authenticate', { email: email, password: password });
+      const response = await this.httpClient.post('/api/users/auth', { email: email, password: password });
       const status = await response.content;
       if (status.success) {
         this.httpClient.configure((configuration) => {
