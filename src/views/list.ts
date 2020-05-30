@@ -3,7 +3,8 @@ import { Poi } from "../services/poi-types";
 import { PoiService } from '../services/poi-service';
 
 @inject(PoiService)
-export class Pois {
+export class List {
+
   pois: Poi[] = [];
   category = ['Castle', 'Forest'];
   total = 0;
@@ -13,4 +14,6 @@ export class Pois {
     this.category = ds.category;
     this.total = ds.total;
   }
+
+
 }

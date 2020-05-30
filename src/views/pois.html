@@ -1,13 +1,11 @@
 <template>
   <require from="../resources/elements/poi-form"></require>
   <require from="../resources/elements/poi-list"></require>
+  <require from="../resources/elements/total-added"></require>
 
       <div class="ui stackable two column grid">
         <div class="column">
-          <poi-form pois.bind="pois"></poi-form>
-        </div>
-        <div class="column">
-          <poi-list pois.bind="pois"></poi-list>
+          <poi-form pois.bind="pois" category.bind="category"></poi-form>
         </div>
   </div>
 </template>

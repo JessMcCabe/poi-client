@@ -3,8 +3,16 @@
     <h3 class="ui dividing header">Add a POI</h3>
     <div class="field"><label>Name </label> <input value.bind="name" /></div>
     <div class="field"><label>Description </label> <input value.bind="description" /></div>
-    <div class="field"><label>Category </label> <input value.bind="category" /></div>
+    <div class="grouped inline fields">
+      <div class="field" repeat.for="method of category">
+    <div class="ui radio checkbox">
+      <input type="radio" model.bind="method" checked.bind="selectedCategory">
+      <label>${method}</label>
+    </div>
+      </div>
+    </div>
     <div class="field"><label>Image </label> <input value.bind="image" /></div>
+    <input type="hidden" name="author" value={{currentUser}}>
     <button class="ui blue submit button">Add</button>
   </form>
 </template>

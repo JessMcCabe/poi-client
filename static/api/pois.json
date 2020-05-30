@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Kilkenny Castle",
+    "description": "A beautiful castle in Kilkenny",
+    "category": "Castle",
+    "image": "https://res.cloudinary.com/dpjnmvjbp/image/upload/v1583264770/Kilkenny%20Castle.jpg"
+  },
+  {
+    "name": "Johnstown Castle",
+    "description": "Johnstown Castle Estate, Museum & Gardens has a long and colourful story stretching over 800 years",
+    "category": "Castle",
+    "image": "https://res.cloudinary.com/dpjnmvjbp/image/upload/v1583264861/Johnstown%20Castle.jpg"
+  }
+]
