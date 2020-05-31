@@ -36,18 +36,22 @@ export class PoiService {
   }
 
   async createPoi(name: string, description: string, category: string, link: string, author:string, location : Location) {
-  const user = this.usersById.values().next()
+    const currentUser = await this.httpClient.get('/api/user/' + localStorage.localUser);
+    let user = JSON.parse(currentUser.response)
+    let id = user._id
     const poi = {
       name: name,
       description: description,
       category: category,
       link:link,
-      author: author,
+      author: id,
       location : location
     };
-    const response = await this.httpClient.post('/api/user/'+ user.value._id +'/poi', poi);
+    const response = await this.httpClient.post('/api/user/'+ id +'/poi', poi);
     const newPoi = await response.content;
     this.pois.push(newPoi);
+    this.ea.publish(new TotalUpdate(this.total, newPoi));
+    this.changeRouter(PLATFORM.moduleName('app'))
   }
 
   async signup(firstName: string, lastName: string, email: string, password: string) {
@@ -76,6 +80,7 @@ export class PoiService {
         });
         localStorage.pois = JSON.stringify(response.content)
         localStorage.list = JSON.stringify(response.content)
+        localStorage.localUser = email
         await this.getUsers();
         await this.getPois();
         this.changeRouter(PLATFORM.moduleName('start'))
@@ -89,6 +94,8 @@ export class PoiService {
 
   logout() {
     localStorage.pois = null;
+    localStorage.list = null;
+    localStorage.localUser = null;
     this.httpClient.configure(configuration => {
       configuration.withHeader('Authorization', '');
     });
