@@ -65,7 +65,8 @@ export class PoiService {
     const newUser = await response.content;
     this.users.set(newUser.email, newUser);
     this.usersById.set(newUser._id, newUser);
-    this.changeRouter(PLATFORM.moduleName('app'))
+    localStorage.localUser = email
+    this.changeRouter(PLATFORM.moduleName('start'))
     return false;
   }
 
