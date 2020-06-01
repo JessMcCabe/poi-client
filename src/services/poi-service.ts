@@ -1,7 +1,7 @@
 import { inject ,Aurelia } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
-import { Poi, User  } from './poi-types';
+import { Poi, User , Location } from './poi-types';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { TotalUpdate } from './messages';
@@ -35,18 +35,23 @@ export class PoiService {
     });
   }
 
-  async createPoi(name: string, description: string, category: string, link: string, author:string) {
-  const user = this.usersById.values().next()
+  async createPoi(name: string, description: string, category: string, link: string, author:string, location : Location) {
+    const currentUser = await this.httpClient.get('/api/user/' + localStorage.localUser);
+    let user = JSON.parse(currentUser.response)
+    let id = user._id
     const poi = {
       name: name,
       description: description,
       category: category,
       link:link,
-      author: author
+      author: id,
+      location : location
     };
-    const response = await this.httpClient.post('/api/user/'+ user.value._id +'/poi', poi);
+    const response = await this.httpClient.post('/api/user/'+ id +'/poi', poi);
     const newPoi = await response.content;
     this.pois.push(newPoi);
+    this.ea.publish(new TotalUpdate(this.total, newPoi));
+    this.changeRouter(PLATFORM.moduleName('app'))
   }
 
   async signup(firstName: string, lastName: string, email: string, password: string) {
@@ -60,7 +65,8 @@ export class PoiService {
     const newUser = await response.content;
     this.users.set(newUser.email, newUser);
     this.usersById.set(newUser._id, newUser);
-    this.changeRouter(PLATFORM.moduleName('app'))
+    localStorage.localUser = email
+    this.changeRouter(PLATFORM.moduleName('start'))
     return false;
   }
 
@@ -75,6 +81,7 @@ export class PoiService {
         });
         localStorage.pois = JSON.stringify(response.content)
         localStorage.list = JSON.stringify(response.content)
+        localStorage.localUser = email
         await this.getUsers();
         await this.getPois();
         this.changeRouter(PLATFORM.moduleName('start'))
@@ -88,6 +95,8 @@ export class PoiService {
 
   logout() {
     localStorage.pois = null;
+    localStorage.list = null;
+    localStorage.localUser = null;
     this.httpClient.configure(configuration => {
       configuration.withHeader('Authorization', '');
     });
