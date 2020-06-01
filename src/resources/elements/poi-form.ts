@@ -15,7 +15,7 @@ export class PoiForm {
 
 
   selectedCategory = '';
-  location: Location = { lat: 53.2734, lng: -7.7783203 };
+  location: Location = { _id: '',lat: 53.2734, lng: -7.7783203 };
 
   constructor(private ds: PoiService) {}
 

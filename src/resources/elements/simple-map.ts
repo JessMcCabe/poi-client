@@ -25,7 +25,7 @@ export class SimpleMap {
 
   attached() {
     const mapConfig = {
-      location: {lat: 53.2734, lng: -7.7783203},
+      location: {_id: '',lat: 53.2734, lng: -7.7783203},
       zoom: 8,
       minZoom: 7,
     };
