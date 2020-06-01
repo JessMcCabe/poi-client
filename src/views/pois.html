@@ -2,10 +2,14 @@
   <require from="../resources/elements/poi-form"></require>
   <require from="../resources/elements/poi-list"></require>
   <require from="../resources/elements/total-added"></require>
+  <require from="../resources/elements/simple-map"></require>
 
       <div class="ui stackable two column grid">
         <div class="column">
           <poi-form pois.bind="pois" category.bind="category"></poi-form>
         </div>
+        <div class="seven wide column">
+        <simple-map></simple-map>
+          </div>
   </div>
 </template>
