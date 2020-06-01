@@ -3,8 +3,8 @@ import { PoiService } from '../services/poi-service';
 
 @inject(PoiService)
 export class Login {
-  email = 'marge@simpson.com';
-  password = 'secret';
+  email = '';
+  password = '';
   prompt = '';
 
   constructor(private ds: PoiService) {
