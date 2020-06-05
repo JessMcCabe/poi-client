@@ -1,0 +1,21 @@
+<template>
+  <h4 class="ui dividing header">Users</h4>
+  <table class="ui celled table segment">
+    <thead>
+    <tr>
+      <th>firstName</th>
+      <th>lastName</th>
+      <th>email</th>
+      <th>admin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr repeat.for="user of users">
+      <td>${user.firstName}</td>
+      <td>${user.lastName}</td>
+      <td>${user.email}</td>
+      <td>${user.admin}</td>
+    </tr>
+    </tbody>
+  </table>
+</template>
