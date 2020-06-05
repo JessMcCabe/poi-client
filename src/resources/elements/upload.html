@@ -1,0 +1,18 @@
+<template>
+  <div class="uk-card uk-card-primary uk-card-body">
+    <div class="uk-card uk-card-primary uk-card-body">
+      <h3 class="uk-card-title">Image Upload</h3>
+      <form class="uk-form-horizontal" submit.delegate="doUpload()">
+        <div class="uk-margin">
+          <label class="uk-form-label">Select Image</label>
+          <div class="uk-form-controls">
+            <input type="file" class="uk-input" files.bind="selectedFiles" accept="image/png, image/jpeg">
+          </div>
+        </div>
+        <p uk-margin>
+          <input type="submit" value="Upload" class="uk-button uk-button-default" if.bind="selectedFiles.length > 0">
+        </p>
+      </form>
+    </div>
+  </div>
+</template>

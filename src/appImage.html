@@ -1,0 +1,18 @@
+<template>
+  <require from="./resources/elements/upload"></require>
+  <require from="./resources/elements/card.html"></require>
+
+  <div class="uk-container">
+    <h1 class="uk-heading-primary">Cloudinary Gallery</h1>
+    <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+      <div><upload></upload></div>
+    </div>
+    <div class="uk-container uk-padding-small">
+      <div class="uk-child-width-1-4@s uk-flex uk-flex-center" uk-grid uk-height-match="target: .uk-card">
+        <div repeat.for="image of imageStore.images">
+          <card image.to-view="image"></card>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

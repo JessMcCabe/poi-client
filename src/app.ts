@@ -15,6 +15,13 @@ export class App {
         title: 'POI'
       },
       {
+        route: ['gallery'],
+        name: 'Gallery',
+        moduleId: PLATFORM.moduleName('views/gallery'),
+        nav: true,
+        title: 'Gallery'
+      },
+      {
         route: 'list',
         name: 'List',
         moduleId: PLATFORM.moduleName('views/list'),
