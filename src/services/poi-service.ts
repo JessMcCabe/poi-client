@@ -93,6 +93,31 @@ export class PoiService {
     return success;
   }
 
+
+  async loginAdmin(email: string, password: string) {
+    let success = false;
+    try {
+      const response = await this.httpClient.post('/api/users/authAdmin', { email: email, password: password });
+      const status = await response.content;
+      if (status.success) {
+        this.httpClient.configure((configuration) => {
+          configuration.withHeader('Authorization', 'bearer ' + status.token);
+        });
+        localStorage.pois = JSON.stringify(response.content)
+        localStorage.list = JSON.stringify(response.content)
+        localStorage.localUser = email
+        await this.getUsers();
+        await this.getPois();
+        this.changeRouter(PLATFORM.moduleName('appAdmin'))
+        success = status.success;
+      }
+    } catch (e) {
+      success = false;
+    }
+    return success;
+  }
+
+
   logout() {
     localStorage.pois = null;
     localStorage.list = null;
