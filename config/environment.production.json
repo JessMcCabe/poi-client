@@ -1,4 +1,10 @@
 {
   "debug": false,
-  "testing": false
+  "testing": false,
+  "weatherApiKey": "6ec7fd269a53d0b12532d8f6ecee1526",
+  "cloudinary": {
+    "name": "dpjnmvjbp",
+    "preset": "rgy8smnc"
+  }
+}
 }
