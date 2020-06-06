@@ -70,6 +70,38 @@ export class PoiService {
     return false;
   }
 
+  async settings(firstName: string, lastName: string, email: string, password: string, deactivate: boolean) {
+    const userUpdated = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      deactivate: deactivate
+    };
+    if (deactivate) {//delete user and return to start and delete any stored local data TODO this is not working
+      const response = await this.httpClient.get('/api/user/delete', userUpdated);
+      localStorage.pois = null;
+      localStorage.list = null;
+      localStorage.localUser = null;
+      this.httpClient.configure(configuration => {
+        configuration.withHeader('Authorization', '');
+      });
+    }
+      this.changeRouter(PLATFORM.moduleName('start'))
+
+    if (!deactivate) {//update user and return to start
+      const response = await this.httpClient.post('/api/user/update', userUpdated);
+      const updatedUser = await response.content;
+      //this.users.set(updatedUser.email, updatedUser);
+      //this.usersById.set(updatedUser._id, updatedUser);
+      localStorage.pois = null;
+      localStorage.list = null;
+      localStorage.localUser = null;
+      this.changeRouter(PLATFORM.moduleName('start'))
+      //return false;
+    }
+  }
+
   async login(email: string, password: string) {
     let success = false;
     try {
