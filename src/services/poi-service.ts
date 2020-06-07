@@ -140,7 +140,10 @@ export class PoiService {
         localStorage.localUser = email
         await this.getUsers();
         await this.getPois();
+
+
         this.changeRouter(PLATFORM.moduleName('appAdmin'))
+
         success = status.success;
       }
     } catch (e) {
@@ -148,7 +151,6 @@ export class PoiService {
     }
     return success;
   }
-
 
   logout() {
     localStorage.pois = null;

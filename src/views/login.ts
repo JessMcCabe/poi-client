@@ -17,4 +17,11 @@ export class Login {
       this.prompt = "Oops! Try again...";
     }
   }
+  async loginAdmin(e) {
+    console.log(`Trying to log in ${this.email}`);
+    const success = await this.ds.loginAdmin(this.email, this.password);
+    if (!success) {
+      this.prompt = "Oops! Try again...";
+    }
+  }
 }

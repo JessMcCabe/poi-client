@@ -36,6 +36,13 @@ export class App {
         title: 'Admin Dashboard'
       },
       {
+      route: 'settings',
+      name: 'settings',
+      moduleId: PLATFORM.moduleName('views/settings'),
+      nav: true,
+      title: 'Settings'
+  },
+      {
         route: 'logout',
         name: 'logout',
         moduleId: PLATFORM.moduleName('views/logout'),
