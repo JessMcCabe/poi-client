@@ -12,7 +12,7 @@ export class Map {
 
   renderPois() {
     for (let poi of this.ds.pois) {
-      const poiStr = `${poi._id} ${poi.author} ${poi.category} ${poi.description} ${poi.link} ${poi.name}`;
+      const poiStr = `Name: ${poi.name}. Category: ${poi.category}. ${poi.description}  `;
       this.map.addMarker(poi.location, poiStr);
       this.map.addMarker(poi.location, poiStr, 'Pois');
     }

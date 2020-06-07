@@ -9,6 +9,7 @@ export class Settings {
   password = '';
   prompt = '';
   deactivate = false;
+
   constructor(private ds: PoiService) {}
 
   settings(e) {
