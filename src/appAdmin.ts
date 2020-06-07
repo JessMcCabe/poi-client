@@ -15,13 +15,6 @@ export class App {
         title: 'POI'
       },
       {
-        route: 'map',
-        name: 'map',
-        moduleId: PLATFORM.moduleName('views/map'),
-        nav: true,
-        title: 'Map'
-      },
-      {
         route: 'list',
         name: 'List',
         moduleId: PLATFORM.moduleName('views/list'),
@@ -29,11 +22,18 @@ export class App {
         title: 'List'
       },
       {
-        route: 'settings',
-        name: 'settings',
-        moduleId: PLATFORM.moduleName('views/settings'),
+        route: 'map',
+        name: 'map',
+        moduleId: PLATFORM.moduleName('views/map'),
         nav: true,
-        title: 'Settings'
+        title: 'Map'
+      },
+      {
+        route: 'users',
+        name: 'users',
+        moduleId: PLATFORM.moduleName('views/admin'),
+        nav: true,
+        title: 'Admin Dashboard'
       },
       {
         route: 'logout',
